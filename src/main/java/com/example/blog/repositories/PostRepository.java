@@ -1,2 +1,9 @@
-package com.example.blog.repositories;public class PostRepository {
+package com.example.blog.repositories;
+
+import com.example.blog.models.Post;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PostRepository extends JpaRepository<Post, Long> {
 }
