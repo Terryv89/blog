@@ -13,6 +13,7 @@
         <div class="cold-md-8">
             <div class="post">
                 <h2 class="text-center" th:text="${post.title}">Title</h2>
+                <h5 th:text="'Written by ' + ${post.account.firstName}">Account First Name</h5>
                 <h5 class="text-muted" th:text="'Created on ' + ${post.createdAt}">Created at</h5>
                 <p th:text="${post.body}">body text</p>
             </div>
