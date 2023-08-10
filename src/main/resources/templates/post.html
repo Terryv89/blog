@@ -2,13 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blog :: 404</title>
+    <meta http-equiv="x-ua-compatible" content="IE-edge">
+    <meta name="viewport" content="width=device=width, initial-scale=1">
+    <title>Blog :: Post</title>
 </head>
 <body>
 <div class="container">
-  <h1>Sorry, Post not found</h1>
-  <hr/>
+    <a th:href="@{'/'}">Home</a>
+    <div class="row">
+        <div class="cold-md-8">
+            <div class="post">
+                <h2 class="text-center" th:text="${post.title}">Title</h2>
+                <h5 class="text-muted" th:text="'Created on ' + ${post.createdAt}">Created at</h5>
+                <p th:text="${post.body}">body text</p>
+            </div>
+        </div>
+    </div>
 </div>
-
 </body>
 </html>
