@@ -1,6 +1,7 @@
 package com.example.blog.config;
 
 import com.example.blog.models.Account;
+import com.example.blog.models.Authority;
 import com.example.blog.models.Post;
 import com.example.blog.services.AccountService;
 import com.example.blog.services.PostService;
@@ -19,11 +20,22 @@ public class SeedData implements CommandLineRunner {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private AuthorityRepository authorityRepository;
+
     @Override
     public void run(String... args) throws Exception{
         List<Post> posts = postService.getAll();
 
         if (posts.size() == 0){
+
+            Authority user = new Authority();
+            user.setName("ROLE_USER");
+            authorityRepository.save(user);
+
+            Authority admin = new Authority();
+            admin.setName("ROLE_ADMIN");
+            authorityRepository.save(admin);
 
             Account account1 = new Account();
             Account account2 = new Account();
