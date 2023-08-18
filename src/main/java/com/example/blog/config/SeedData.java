@@ -3,13 +3,16 @@ package com.example.blog.config;
 import com.example.blog.models.Account;
 import com.example.blog.models.Authority;
 import com.example.blog.models.Post;
+import com.example.blog.repositories.AuthorityRepository;
 import com.example.blog.services.AccountService;
 import com.example.blog.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class SeedData implements CommandLineRunner {
@@ -44,11 +47,18 @@ public class SeedData implements CommandLineRunner {
             account1.setLastName("user");
             account1.setEmail("user.user@domain.com");
             account1.setPassword("password");
+            Set<Authority> authorities1 = new HashSet<>();
+            authorityRepository.findById("ROLE_USER").ifPresent(authorities1::add);
+            account1.setAuthorities(authorities1);
 
             account2.setFirstName("admin");
             account2.setLastName("admin");
             account2.setEmail("admin.admin@domain.com");
             account2.setPassword("password");
+            Set<Authority> authorities2 = new HashSet<>();
+            authorityRepository.findById("ROLE_USER").ifPresent(authorities2::add);
+            authorityRepository.findById("ROLE_ADMIN").ifPresent(authorities2::add);
+            account1.setAuthorities(authorities2);
 
             accountService.save(account1);
             accountService.save(account2);
